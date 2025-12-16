@@ -6,7 +6,7 @@ public class Task {
     private boolean isCompleted;
 
 // Now the best part of Constructor 
-public Task(int id, String title, String description, String priority, boolean isCompleted) {
+public Task(int id, String title, String description, String priority) {
     this.id = id;
     this.title =  title;
     this.description = description;

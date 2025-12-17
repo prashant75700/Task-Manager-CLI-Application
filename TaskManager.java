@@ -82,6 +82,25 @@ public class TaskManager {
         }
     }
 
+    //UPDATE: here we use this method to UnMark the completed task 
+    public void unmarkComplete(int id) {
+        Task task = findTaskById(id);
+
+        if (task != null) {
+            //it checks if task is actully completed or not ??
+            if (!task.isCompleted()) {
+                System.out.println("Task is arleady Pending ( Not completed yet )");
+                return;
+            }
+            //it will help to Unmark the task  ( set back to pending )
+            task.setCompleted(false);
+            System.out.println("Task Unmarked ! Status changed back to PENDING.");
+        }
+        else {
+            System.out.println("Task with ID " + id + " not found.");
+        }
+    }
+
     //DELETE: here we can Remove the task
     public void deleteTask(int id) {
         Task task = findTaskById(id);
@@ -97,8 +116,9 @@ public class TaskManager {
     // SEARCH: Find tasks by Priority
     public void searchByPriority(String priority) {
         ArrayList<Task> results = new ArrayList<>();
+        String searchPriority = priority.toUpperCase();
         for (Task task : tasks) {
-            if (task.getPriority().equalsIgnoreCase(priority)) {
+            if (task.getPriority().equals(searchPriority)) {
                 results.add(task);
             }
         }
@@ -107,10 +127,11 @@ public class TaskManager {
         }
         else {
             System.out.println("\n======= TASKS WITH PRIORITY: " + priority + " =======");
-            for (Task task : tasks) {
+            for (Task task : results) {
                 System.out.println(task);
                 System.out.println("------------------------------");
             }
+            System.out.println("Total found: " + results.size());
         }
     }
 
@@ -126,12 +147,23 @@ public class TaskManager {
             System.out.println("No pending tasks here");
         }
         else {
+            //sorting our task by priority  ( here I googled it hehhehe, nvr thought it could be done via here -_- )
+
+            Collections.sort(pending, new Comparator<Task>() {
+                @Override
+                public int compare(Task t1, Task t2) {
+                    int priority1 = getPriorityValue(t1.getPriority());
+                    int priority2 = getPriorityValue(t2.getPriority());
+                    return Integer.compare(priority2, priority1);
+                }
+            });
             System.out.println("\n======= PENDING TASKS =======");
 
-            for (Task task : tasks) {
+            for (Task task : pending) {
                 System.out.println(task);
                 System.out.println("------------------------------");
             }
+            System.out.println("Total pending: " + pending.size());
         }
     }
 
@@ -167,8 +199,9 @@ public class TaskManager {
             }
         });
         System.out.println("Tasks sorted by priority!");
-        viewAllTasks();
+        viewPendingTasks();
     }
+
 
     //STATS: it'll help us to Show Statics of our tasks
     public void showStats() {

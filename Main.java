@@ -54,28 +54,34 @@ public class Main {
                     int completeId = sc.nextInt();
                     manager.markComplete(completeId);
                     break;
+
+                case 6: // Unamrk the Task (set as Incomplete)
+                    System.out.println("Enter task ID to Unmark the task (Set as Pending)");
+                    int unmarkId = sc.nextInt();
+                    manager.unmarkComplete(unmarkId);
+                    break;
                     
-                case 6:  // Delete Task
+                case 7:  // Delete Task
                     System.out.print("Enter task ID to delete: ");
                     int deleteId = sc.nextInt();
                     manager.deleteTask(deleteId);
                     break;
                     
-                case 7:  // Search by Priority
+                case 8:  // Search by Priority
                     System.out.print("Enter priority (HIGH/MEDIUM/LOW): ");
                     String searchPriority = sc.nextLine();
                     manager.searchByPriority(searchPriority);
                     break;
                     
-                case 8:  // View Pending Tasks
+                case 9:  // View Pending Tasks
                     manager.viewPendingTasks();
                     break;
                     
-                case 9:  // Sort by Priority
+                case 10:  // Sort by Priority
                     manager.sortByPriority();
                     break;
                     
-                case 10:  // Show Stats
+                case 11:  // Show Stats
                     manager.showStats();
                     break;
                     
@@ -108,11 +114,12 @@ public class Main {
         System.out.println("║ 3.  View Single Task              ║");
         System.out.println("║ 4.  Update Task                   ║");
         System.out.println("║ 5.  Mark Task as Complete         ║");
-        System.out.println("║ 6.  Delete Task                   ║");
-        System.out.println("║ 7.  Search by Priority            ║");
-        System.out.println("║ 8.  View Pending Tasks            ║");
-        System.out.println("║ 9.  Sort by Priority              ║");
-        System.out.println("║ 10. Show Statistics               ║");
+        System.out.println("║ 6.  Unmark Task as Pending        ║");
+        System.out.println("║ 7.  Delete Task                   ║");
+        System.out.println("║ 8.  Search by Priority            ║");
+        System.out.println("║ 9.  View Pending Tasks            ║");
+        System.out.println("║ 10. Sort by Priority              ║");
+        System.out.println("║ 11. Show Statistics               ║");
         System.out.println("║ 0.  Exit                          ║");
         System.out.println("=====================================");
 

@@ -93,4 +93,108 @@ public class TaskManager {
             System.out.println("Task with ID " + id + " not found");
         }
     }
+
+    // SEARCH: Find tasks by Priority
+    public void searchByPriority(String priority) {
+        ArrayList<Task> results = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getPriority().equalsIgnoreCase(priority)) {
+                results.add(task);
+            }
+        }
+        if (results.isEmpty()) {
+            System.out.println("No tasks found with priority");
+        }
+        else {
+            System.out.println("\n======= TASKS WITH PRIORITY: " + priority + " =======");
+            for (Task task : tasks) {
+                System.out.println(task);
+                System.out.println("------------------------------");
+            }
+        }
+    }
+
+    // Filter: show only pendingg tasks
+    public void viewPendingTasks() {
+        ArrayList<Task> pending = new ArrayList<>();
+        for (Task task : tasks) {
+            if (!task.isCompleted()) {
+                pending.add(task);
+            }
+        }
+        if (pending.isEmpty()) {
+            System.out.println("No pending tasks here");
+        }
+        else {
+            System.out.println("\n======= PENDING TASKS =======");
+
+            for (Task task : tasks) {
+                System.out.println(task);
+                System.out.println("------------------------------");
+            }
+        }
+    }
+
+    //SORT: sorting task by priority  ( HIGH -> MEDIUM -> LOW )
+
+    //first of all we have to made a helper method for our sorting method ( we can't ruin our mind again as we F****dup with the findTaskById )
+
+    private int getPriorityValue (String priority) {
+        switch (priority) {
+            
+            case "HIGH": 
+                return 3;
+
+            case "MEDIUM":
+                return 2;
+
+            case "LOW": 
+                return 1;
+        
+            default:
+                return 0;
+        }
+    }
+
+    //Now our sorting method arrived here 
+    public void sortByPriority() {
+        Collections.sort(tasks, new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                int priority1 = getPriorityValue(t1.getPriority());
+                int priority2 = getPriorityValue(t2.getPriority());
+                return Integer.compare(priority2, priority1); // using Descending order 
+            }
+        });
+        System.out.println("Tasks sorted by priority!");
+        viewAllTasks();
+    }
+
+    //STATS: it'll help us to Show Statics of our tasks
+    public void showStats() {
+        int completed = 0;
+        int high = 0, medium = 0, low = 0;
+
+        for ( Task task : tasks) {
+            if (task.isCompleted()) completed++;
+
+            switch (task.getPriority()) {
+                case "HIGH": high++;
+                    break;
+                case "MEDIUM": medium++;
+                    break;
+                case "LOW": low++;
+                    break;
+            }
+        }
+
+        System.out.println("\n========== TASK STATISTICS ==========");
+        System.out.println("Total Tasks: " + tasks.size());
+        System.out.println("Completed: " + completed);
+        System.out.println("Pending: " + (tasks.size() - completed));
+        System.out.println("\nPriority Breakdown:");
+        System.out.println("  HIGH: " + high);
+        System.out.println("  MEDIUM: " + medium);
+        System.out.println("  LOW: " + low);
+    }
 }

@@ -1,3 +1,5 @@
+package com.example.taskmanager;
+
 public class Task {
     private int id;
     private String title;

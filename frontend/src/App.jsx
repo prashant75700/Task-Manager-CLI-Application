@@ -16,7 +16,7 @@ function App() {
   const fetchData = async () => {
     try {
       const tasksRes = await fetch(`${API_URL}/tasks`);
-      const statsRes = await fetch(`${API_URL}/stats`);
+      const statsRes = await fetch(`${API_URL}/tasks/stats`);
 
       const tasksData = await tasksRes.json();
       const statsData = await statsRes.json();

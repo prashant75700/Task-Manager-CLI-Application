@@ -22,7 +22,7 @@ We will use **Render** (render.com) with Docker to deploy your Java application.
     *   **Environment:** Docker (It should detect the Dockerfile automatically)
     *   **Plan:** Free
 5.  Click **"Create Web Service"**.
-6.  **Wait** for the deployment to finish (It may take a few minutes to build the Java Maven Docker image).
+6.  **Wait** for the deployment to finish (It may take a few minutes to build the Java Gradle Docker image).
     Render will give you a URL like: `https://task-manager-api.onrender.com`
     **COPY THIS URL.**
 
